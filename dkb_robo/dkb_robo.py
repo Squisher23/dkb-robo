@@ -801,7 +801,7 @@ class DKBRobo(object):
             amount = cols[3 + ontop].text.strip().replace('.', '')
             try:
                 overview_dic[counter]['amount'] = float(amount.replace(',', '.'))
-            except ValueError:
+            except BaseException:
                 pass
 
             # get link for transactions
@@ -821,14 +821,14 @@ class DKBRobo(object):
                     overview_dic[counter]['type'] = 'depot'
                     link = cols[4 + ontop].find('a', attrs={'class': 'evt-depot'})
                     overview_dic[counter]['transactions'] = self.base_url + link['href']
-                except (IndexError, TypeError):
+                except BaseException:
                     pass
 
             # get link for details
             try:
                 link = cols[4 + ontop].find('a', attrs={'class': 'evt-details'})
                 overview_dic[counter]['details'] = self.base_url + link['href']
-            except (IndexError, TypeError):
+            except BaseException:
                 pass
 
             # increase counter
